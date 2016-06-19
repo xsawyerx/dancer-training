@@ -73,7 +73,7 @@ has served_time => (
 sub set_served {
     my $self = shift;
     $self->_set_served(1);
-    $self->_set_served_time( localtime time );
+    $self->_set_served_time( scalar localtime time );
 }
 
 1;

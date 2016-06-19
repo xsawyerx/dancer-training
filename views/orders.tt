@@ -1,5 +1,5 @@
 <h3><a href="/new_order">Make a new order</a></h3>
-<h3><a href="/login">Login</a></h3>
+<% unless admin %><h3><a href="/login">Login</a></h3><% END %>
 
 <h2>Orders</h2>
 
@@ -25,12 +25,12 @@
     <% IF admin %>
     <td>
         <form name="form_server">
-          <input type="button" <% UNLESS ordered.served %> disabled=1 <% END %> name="serve" value="Serve" onClick="form_patch('<% order.id %>'); return false;"/>
+          <input type="button" <% IF ordered.served %> disabled=1 <% END %> name="serve" value="Serve" onClick="form_patch('<% order.id %>'); return false;"/>
         </form>
     </td>
     <td>
         <form name="form_cancel">
-          <input type="submit" <% UNLESS ordered.served %> disabled=1 <% END %> name="delete" value="Delete" onClick="form_delete('<% order.id %>'); return false;"/>
+          <input type="submit" <% IF ordered.served %> disabled=1 <% END %> name="delete" value="Delete" onClick="form_delete('<% order.id %>'); return false;"/>
         </form>
     </td>
     <% END %>
