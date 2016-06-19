@@ -65,16 +65,15 @@ has served => (
 );
 
 has served_time => (
-    is      => 'ro',
-    isa     => Str,
-    lazy    => 1,
-    default => sub { localtime time },
+    is     => 'ro',
+    isa    => Str,
+    writer => '_set_served_time',
 );
 
 sub set_served {
     my $self = shift;
     $self->_set_served(1);
-    $self->served_time;
+    $self->_set_served_time( localtime time );
 }
 
 1;
