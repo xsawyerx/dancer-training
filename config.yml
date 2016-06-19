@@ -7,3 +7,5 @@ engines:
       start_tag: '<%'
       end_tag:   '%>'
 auto_page: 1
+passwd_salt: "j$jz#&vz9(3$f.;P"
+passwd_file: passwd
