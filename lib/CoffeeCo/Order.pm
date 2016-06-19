@@ -36,7 +36,7 @@ has milk => (
         !$_[0] || $_[0] =~ /^(no|dairy|soy|almond|coconut)$/
             or die "Incorrect type: $_[0]";
     },
-    predicate => 'has_milk',
+    default => sub {'no'},
 );
 
 has whipped_cream => (
@@ -78,3 +78,131 @@ sub set_served {
 }
 
 1;
+
+__END__
+
+=pod
+
+=head1 SYNOPSIS
+
+    my $order = CoffeeCo::Order->new(
+        name          => 'Sawyer',
+        size          => 'humongous',
+        milk          => 'coconut',
+        whipped_cream => 0, # default
+        syrup         => [ 'caramel', 'hazelnut' ],
+    );
+
+    ...
+
+    if ( ! $order->served ) {
+        $order->set_served; # yay!
+    }
+
+=head1 ATTRIBUTES
+
+=head2 id
+
+An ID representing the order. This is B<read-only> and gets created
+automatically after you create a new order object.
+
+=head2 create_time
+
+The created time for the order. This is a B<read-only> and gets
+created automatically after you create a new order object.
+
+=head2 name
+
+A name for the order. This is a B<read-only> and B<required> to provide
+when creating an order.
+
+=head2 size
+
+A size for the order. This is B<read-only> and B<required> to provide
+when creating an order.
+
+Available values:
+
+=over 4
+
+=item * C<tiny>
+
+=item * C<normal>
+
+=item * C<humongous>
+
+=back
+
+=head2 milk
+
+A milk type for the order. This is B<read-only> and B<optional> when
+creating an order.
+
+Available milk types:
+
+=over 4
+
+=item * C<no>
+
+=item * C<dairy>
+
+=item * C<soy>
+
+=item * C<almond>
+
+=item * C<coconut>
+
+=back
+
+Default: B<no>.
+
+=head2 whipped_cream
+
+A boolean whether to have whipped cream with the order. Default: B<0>.
+
+=head2 syrup
+
+An arrayref of syrups. This is B<optional>.
+
+Available syrups:
+
+=over 4
+
+=item * C<caramel>
+
+=item * C<moca>
+
+=item * C<hazelnut>
+
+=item * C<chocolate>
+
+=item * C<vanilla>
+
+=item * C<rum>
+
+=back
+
+=head2 served
+
+A boolean representing whether an order was already served.
+
+=head2 served_time
+
+A string representing when an order was served.
+
+=head1 METHODS
+
+=head2 has_syrup
+
+    if ( $order->has_syrup ) {
+        # syrup was provided
+    }
+
+Return a boolean for whether there is any syrup for the order.
+
+=head2 set_served
+
+    $order->set_served;
+
+Sets the boolean that the serving was done, which then also adjusts the
+time the serving was done.
