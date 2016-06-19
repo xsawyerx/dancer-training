@@ -1,0 +1,9 @@
+<html>
+<head>
+<script src="/js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<h1>Welcome to Coffee&amp;Co, <% name %>!</h1>
+<% content %>
+</body>
+</html>

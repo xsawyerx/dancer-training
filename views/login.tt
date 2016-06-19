@@ -1,0 +1,24 @@
+<h2>Login</h2>
+
+<% IF request.query_parameters.get('failure') %>
+    <h3 style="color: red;">Failed to authenticate</h3>
+    <address>Please try again</address>
+    <br><br>
+<% END %>
+
+<form method="post" action="/login">
+<table>
+    <tr>
+        <td>Name</td>
+        <td><input type="text" size="20" name="username"/></td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td><input type="password" name="password"/></td>
+    </tr>
+</table>
+
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" name="submit" value="Login"/>
+</form>

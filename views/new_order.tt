@@ -1,0 +1,111 @@
+<h2>Create a new order</h2>
+<address>(<% now %>)</address>
+
+<form method="post">
+<table border="0" style="padding: 5px">
+<tr>
+    <td>Name</td>
+    <td><input type="text" size="20" name="name"/></td>
+</tr>
+
+<tr>
+    <td>Size</td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td>
+        <table>
+        <tr>
+            <td><input type="radio" name="cup_size" value="tiny"/></td>
+            <td>Tiny</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="cup_size" value="normal"/></td>
+            <td>Normal</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="cup_size" value="humongous"/></td>
+            <td>Homongous</td>
+        </tr>
+        </table>
+    </td>
+</tr>
+
+<tr>
+    <td>Milk?</td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td>
+        <table>
+        <tr>
+            <td><input type="radio" name="milk" value="no"/></td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="milk" value="dairy"/></td>
+            <td>Dairy</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="milk" value="soy"/></td>
+            <td>Soy</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="milk" value="almond"/></td>
+            <td>Almond</td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="milk" value="coconut"/></td>
+            <td>Coconut</td>
+        </tr>
+        </table>
+    </td>
+</tr>
+
+<tr>
+    <td>Whipped<br>cream?</td>
+    <td><input type="checkbox" name="whipped_cream" value="1"/></td>
+</tr>
+
+<tr>
+    <td>Syrup</td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td>
+        <table>
+        <tr>
+            <td><input type="checkbox" name="syrup" value="caramel"/></td>
+            <td>Caramel</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="syrup" value="moca"/></td>
+            <td>Moca</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="syrup" value="hazelnut"/></td>
+            <td>Hazelnut</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="syrup" value="chocolate"/></td>
+            <td>Chocolate</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="syrup" value="vanilla"/></td>
+            <td>Vanilla</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="syrup" value="rum"/></td>
+            <td>Rum</td>
+        </tr>
+        </table>
+    </td>
+</tr>
+</table>
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="submit" value="Order!" name="submit"/>
+</form>

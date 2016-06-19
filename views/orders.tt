@@ -1,0 +1,62 @@
+<h3><a href="/new_order">Make a new order</a></h3>
+<h3><a href="/login">Login</a></h3>
+
+<h2>Orders</h2>
+
+<% IF orders.size %>
+<table border="0" style="padding: 5px">
+<tr>
+    <td>Time</td>
+    <td>Name</td>
+    <td>Order</td>
+    <td>Status</td>
+    <% IF admin %>
+    <td>Serve</td>
+    <td>Delete</td>
+    <% END %>
+</tr>
+
+<% FOREACH order IN orders %>
+<tr>
+    <td><% order.create_time %></td>
+    <td><% order.name %></td>
+    <td><% order.size.ucfirst %> (Milk: <% order.milk.ucfirst %>) <% order.syrup.join(', ').ucfirst %></td>
+    <td><% IF order.served %> <% order.served_time %> <% END %></td>
+    <% IF admin %>
+    <td>
+        <form name="form_server">
+          <input type="button" <% UNLESS ordered.served %> disabled=1 <% END %> name="serve" value="Serve" onClick="form_patch('<% order.id %>'); return false;"/>
+        </form>
+    </td>
+    <td>
+        <form name="form_cancel">
+          <input type="submit" <% UNLESS ordered.served %> disabled=1 <% END %> name="delete" value="Delete" onClick="form_delete('<% order.id %>'); return false;"/>
+        </form>
+    </td>
+    <% END %>
+</tr>
+<% END %>
+<% ELSE %>
+No current orders
+<% END %>
+
+<script type="text/javascript">
+function form_patch (id) {
+    $.ajax({
+        'url':'/order/'+id,
+        'type':'PATCH',
+        'success':function(result){
+          location.reload();
+        }
+    });
+}
+function form_delete (id) {
+    $.ajax({
+        'url':'/order/'+id,
+        'type':'DELETE',
+        'success':function(result){
+          location.reload();
+        }
+    });
+}
+</script>
