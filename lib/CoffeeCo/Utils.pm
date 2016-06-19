@@ -54,3 +54,34 @@ sub store_order {
 }
 
 1;
+
+__END__
+
+=pod
+
+=head1 FUNCTIONS
+
+=head2 create_db
+
+    create_db();
+
+Called to create a new database object.
+
+=head2 all_orders
+
+    my @orders = all_orders($db);
+
+Retrieve all the orders from a database. Returns C<CoffeeCo::Order>
+objects.
+
+=head2 order_by_id
+
+    my $order = order_by_id( $db, $order_id );
+
+Returns a C<CoffeeCo::Order> object from a database using an ID.
+
+=head2 store_order
+
+    store_order( $db, $order );
+
+Stores in the database a C<CoffeeCo::Order> object.
