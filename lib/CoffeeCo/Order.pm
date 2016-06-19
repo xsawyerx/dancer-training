@@ -84,6 +84,12 @@ __END__
 
 =head1 SYNOPSIS
 
+    # somewhere in your program:
+    my $db    = CoffeeCo::Utils::create_db();
+    my $scope = $db->new_scope;
+
+
+    # new order:
     my $order = CoffeeCo::Order->new(
         name          => 'Sawyer',
         size          => 'humongous',
@@ -92,11 +98,27 @@ __END__
         syrup         => [ 'caramel', 'hazelnut' ],
     );
 
-    ...
+    CoffeeCo::Utils::store_order( $db, $order );
+
+
+    # find an order
+    my $order = CoffeeCo::Utils::order_by_id(
+        $db,
+        $order_id_we_got_from_somewhere,
+    );
+
+
+    # do stuff with an order
 
     if ( ! $order->served ) {
+        # set served
         $order->set_served; # yay!
+        # update the database
+        $db->update($order);
     }
+
+    # delete an order
+    $db->delete($order);
 
 =head1 ATTRIBUTES
 

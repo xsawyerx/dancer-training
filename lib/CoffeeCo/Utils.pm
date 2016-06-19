@@ -59,6 +59,15 @@ __END__
 
 =pod
 
+=head1 SYNOPSIS
+
+    # first, we create a database object
+    my $db = CoffeeCo::Utils::create_db();
+
+    # we then create a scope
+    # (you cannot use the DB without a new scope)
+    my $scope = $db->new_scope;
+
 =head1 FUNCTIONS
 
 =head2 create_db
