@@ -17,16 +17,16 @@
     <td>
         <table>
         <tr>
-            <td><input type="radio" name="cup_size" value="tiny"/></td>
-            <td>Tiny</td>
+            <td><input type="radio" name="cup_size" id="tiny" value="tiny"/></td>
+            <td><label for="tiny">Tiny</label></td>
         </tr>
         <tr>
-            <td><input type="radio" name="cup_size" value="normal"/></td>
-            <td>Normal</td>
+            <td><input type="radio" name="cup_size" id="normal" value="normal"/></td>
+            <td><label for="normal">Normal</label></td>
         </tr>
         <tr>
-            <td><input type="radio" name="cup_size" value="humongous"/></td>
-            <td>Homongous</td>
+            <td><input type="radio" name="cup_size" id="humongous" value="humongous"/></td>
+            <td><label for="humongous">Homongous</label></td>
         </tr>
         </table>
     </td>
@@ -41,32 +41,32 @@
     <td>
         <table>
         <tr>
-            <td><input type="radio" name="milk" value="no"/></td>
-            <td>No</td>
+            <td><input type="radio" name="milk" id="no" value="no"/></td>
+            <td><label for="no">No</label></td>
         </tr>
         <tr>
-            <td><input type="radio" name="milk" value="dairy"/></td>
-            <td>Dairy</td>
+            <td><input type="radio" name="milk" id="dairy" value="dairy"/></td>
+            <td><label for="dairy">Dairy</label></td>
         </tr>
         <tr>
-            <td><input type="radio" name="milk" value="soy"/></td>
-            <td>Soy</td>
+            <td><input type="radio" name="milk" id="soy" value="soy"/></td>
+            <td><label for="soy">Soy</label></td>
         </tr>
         <tr>
-            <td><input type="radio" name="milk" value="almond"/></td>
-            <td>Almond</td>
+            <td><input type="radio" name="milk" id="almond" value="almond"/></td>
+            <td><label for="almond">Almond</label></td>
         </tr>
         <tr>
-            <td><input type="radio" name="milk" value="coconut"/></td>
-            <td>Coconut</td>
+            <td><input type="radio" name="milk" id="coconut" value="coconut"/></td>
+            <td><label for="coconut">Coconut</label></td>
         </tr>
         </table>
     </td>
 </tr>
 
 <tr>
-    <td>Whipped<br>cream?</td>
-    <td><input type="checkbox" name="whipped_cream" value="1"/></td>
+    <td><label for="whipped_cream">Whipped<br>cream?</label></td>
+    <td><input type="checkbox" id="whipped_cream" name="whipped_cream" value="1"/></td>
 </tr>
 
 <tr>
@@ -78,28 +78,28 @@
     <td>
         <table>
         <tr>
-            <td><input type="checkbox" name="syrup" value="caramel"/></td>
-            <td>Caramel</td>
+            <td><input type="checkbox" name="syrup" id="caramel" value="caramel"/></td>
+            <td><label for="caramel">Caramel</label></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="syrup" value="moca"/></td>
-            <td>Moca</td>
+            <td><input type="checkbox" name="syrup" id="moca" value="moca"/></td>
+            <td><label for="moca">Moca</label></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="syrup" value="hazelnut"/></td>
-            <td>Hazelnut</td>
+            <td><input type="checkbox" name="syrup" id="hazelnut" value="hazelnut"/></td>
+            <td><label for="hazelnut">Hazelnut</label></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="syrup" value="chocolate"/></td>
-            <td>Chocolate</td>
+            <td><input type="checkbox" name="syrup" id="chocolate" value="chocolate"/></td>
+            <td><label for="chocolate">Chocolate</label></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="syrup" value="vanilla"/></td>
-            <td>Vanilla</td>
+            <td><input type="checkbox" name="syrup" id="vanilla" value="vanilla"/></td>
+            <td><label for="vanilla">Vanilla</label></td>
         </tr>
         <tr>
-            <td><input type="checkbox" name="syrup" value="rum"/></td>
-            <td>Rum</td>
+            <td><input type="checkbox" name="syrup" id="rum" value="rum"/></td>
+            <td><label for="rum">Rum</label></td>
         </tr>
         </table>
     </td>
