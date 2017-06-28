@@ -29,13 +29,16 @@ my %users;
         or die "Cannot close $passwd_file: $!\n";
 }
 
-hook before => sub { var scope => $db->new_scope };
+hook 'before' => sub { var 'scope' => $db->new_scope };
 
-hook before_template => sub {
+hook 'before_template' => sub {
     my $vars = shift;
     $vars->{'admin'}  = session('username');
+    $vars->{'now'}    = localtime;
     $vars->{'name'} ||= 'Stranger';
 };
+
+get '/' => sub { forward '/orders'; };
 
 get '/orders' => sub {
     my @orders = CoffeeCo::Utils::all_orders($db);
@@ -44,10 +47,6 @@ get '/orders' => sub {
         orders => \@orders,
         admin  => query_parameters->get('admin'),
     };
-};
-
-get '/' => sub {
-    redirect '/orders';
 };
 
 prefix '/new_order' => sub {
@@ -70,7 +69,7 @@ prefix '/new_order' => sub {
 
         CoffeeCo::Utils::store_order( $db, $order );
 
-        redirect '/orders';
+        redirect '/';
     };
 };
 
@@ -91,12 +90,14 @@ prefix '/order/:id' => sub {
             or send_error("Requested order not found", 404);
         $order->set_served();
         $db->update($order);
+        return 1;
     };
 
     del '' => sub {
         my $order = CoffeeCo::Utils::order_by_id( $db, route_parameters->get('id') )
             or send_error("Requested order not found", 404 );
         $db->delete($order);
+        return 1;
     };
 };
 
