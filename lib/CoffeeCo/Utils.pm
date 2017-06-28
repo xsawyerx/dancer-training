@@ -1,56 +1,23 @@
 package CoffeeCo::Utils;
 use strict;
 use warnings;
-use KiokuDB;
-use KiokuDB::Backend::Files;
+use Path::Tiny;
+#use Data::UUID;
+#use UUID::Tiny qw<create_uuid_as_string>;
+use CoffeeCo::DB;
+use JSON::MaybeXS qw< encode_json decode_json >;
+
+use constant {
+    'DB_PATH' => path('db'),
+};
 
 sub create_db {
     # set up
-    -d 'db' or mkdir 'db';
-    my $db = KiokuDB->new(
-        backend => KiokuDB::Backend::Files->new(
-            dir        => 'db',
-            serializer => 'yaml',
-        )
-    );
-    return $db;
-}
+    my $path = shift || DB_PATH();
+    $path->is_dir
+        or $path->mkpath();
 
-
-sub all_orders {
-    my $db = shift
-        or die "Must provide db object\n";
-
-    my $orders = $db->all_objects;
-    my @orders;
-
-    while ( my $block = $orders->next ) {
-        push @orders => @$block;
-    }
-
-    return @orders;
-}
-
-sub order_by_id {
-    my $db = shift
-        or die "Must provide db object\n";
-
-    my $id = shift
-        or die "Must provide id\n";
-
-    return $db->lookup($id);
-}
-
-sub store_order {
-    my $db = shift
-        or die "Must provide db object\n";
-
-    my $order = shift
-        or die "Must provide order object\n";
-
-    my $uuid = $db->store($order);
-    $order->set_id($uuid);
-    $db->update($order);
+    return CoffeeCo::DB->new( 'path' => $path );
 }
 
 1;
@@ -61,12 +28,7 @@ __END__
 
 =head1 SYNOPSIS
 
-    # first, we create a database object
     my $db = CoffeeCo::Utils::create_db();
-
-    # we then create a scope
-    # (you cannot use the DB without a new scope)
-    my $scope = $db->new_scope;
 
 =head1 FUNCTIONS
 
@@ -74,23 +36,4 @@ __END__
 
     create_db();
 
-Called to create a new database object.
-
-=head2 all_orders
-
-    my @orders = all_orders($db);
-
-Retrieve all the orders from a database. Returns C<CoffeeCo::Order>
-objects.
-
-=head2 order_by_id
-
-    my $order = order_by_id( $db, $order_id );
-
-Returns a C<CoffeeCo::Order> object from a database using an ID.
-
-=head2 store_order
-
-    store_order( $db, $order );
-
-Stores in the database a C<CoffeeCo::Order> object.
+Create a new database object.

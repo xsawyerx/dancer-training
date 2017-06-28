@@ -4,6 +4,7 @@ use CoffeeCo::Order;
 use CoffeeCo::Utils;
 use MIME::Base64;
 use Crypt::Eksblowfish::Bcrypt qw<bcrypt_hash>;
+use Time::HiRes qw<gettimeofday tv_interval>;
 
 my $db = CoffeeCo::Utils::create_db();
 
@@ -29,7 +30,12 @@ my %users;
         or die "Cannot close $passwd_file: $!\n";
 }
 
-hook 'before' => sub { var 'scope' => $db->new_scope };
+hook 'before' => sub { var 'start_time' => [ gettimeofday() ]; };
+
+hook 'after' => sub {
+    my $elapsed = tv_interval ( vars->{'start_time'}, [gettimeofday]);
+    debug "Time for request: $elapsed";
+};
 
 hook 'before_template' => sub {
     my $vars = shift;
@@ -41,7 +47,7 @@ hook 'before_template' => sub {
 get '/' => sub { forward '/orders'; };
 
 get '/orders' => sub {
-    my @orders = CoffeeCo::Utils::all_orders($db);
+    my @orders = $db->all_orders();
 
     template 'orders' => {
         orders => \@orders,
@@ -67,7 +73,7 @@ prefix '/new_order' => sub {
             syrup         => [ $params->get_all('syrup') ],
         );
 
-        CoffeeCo::Utils::store_order( $db, $order );
+        $db->store_order($order);
 
         redirect '/';
     };
@@ -86,17 +92,17 @@ post '/login' => sub {
 
 prefix '/order/:id' => sub {
     patch '' => sub {
-        my $order = CoffeeCo::Utils::order_by_id( $db, route_parameters->get('id') )
+        my $order = $db->order_by_id( route_parameters->get('id') )
             or send_error("Requested order not found", 404);
         $order->set_served();
-        $db->update($order);
+        $db->update_order($order);
         return 1;
     };
 
     del '' => sub {
-        my $order = CoffeeCo::Utils::order_by_id( $db, route_parameters->get('id') )
+        my $order = $db->order_by_id( route_parameters->get('id') )
             or send_error("Requested order not found", 404 );
-        $db->delete($order);
+        $db->delete_order($order);
         return 1;
     };
 };
