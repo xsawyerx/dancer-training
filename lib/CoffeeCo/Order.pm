@@ -5,7 +5,6 @@ use MooX::Types::MooseLike::Base qw<Bool Str>;
 has id => (
     is       => 'ro',
     isa      => Str,
-    init_arg => undef,
     writer   => 'set_id',
 );
 
