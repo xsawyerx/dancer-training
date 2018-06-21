@@ -3,9 +3,9 @@ use warnings;
 use Test::More;
 use Test::WWW::Mechanize::PSGI;
 use Plack::Test;
-use Plack::App::Proxy;
 use HTTP::Request;
 use t::lib::CoffeeCoTests;
+use Web::Query;
 
 my ( $mech, $app ) = t::lib::CoffeeCoTests::mech();
 
@@ -20,7 +20,6 @@ subtest 'Orders page' => sub {
     );
 };
 
-use Web::Query;
 subtest 'Found all orders' => sub {
     my $first;
     wq( $mech->content )->find('table > tr')

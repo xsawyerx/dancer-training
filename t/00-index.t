@@ -3,7 +3,6 @@ use warnings;
 use Test::More;
 use Test::WWW::Mechanize::PSGI;
 use Plack::Test;
-use Plack::App::Proxy;
 use HTTP::Request;
 use t::lib::CoffeeCoTests;
 
