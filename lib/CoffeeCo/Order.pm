@@ -85,7 +85,6 @@ __END__
 
     # somewhere in your program:
     my $db    = CoffeeCo::Utils::create_db();
-    my $scope = $db->new_scope;
 
 
     # new order:
@@ -97,14 +96,11 @@ __END__
         syrup         => [ 'caramel', 'hazelnut' ],
     );
 
-    CoffeeCo::Utils::store_order( $db, $order );
+    $db->store_order( $order );
 
 
     # find an order
-    my $order = CoffeeCo::Utils::order_by_id(
-        $db,
-        $order_id_we_got_from_somewhere,
-    );
+    my $order = $db->order_by_id( $order_id_we_got_from_somewhere );
 
 
     # do stuff with an order
