@@ -16,12 +16,7 @@ subtest 'Index basics' => sub {
 subtest 'Index redirects' => sub {
     my $test = Plack::Test->create($app);
     my $response = $test->request( HTTP::Request->new( GET => '/' ) );
-    ok( $response->is_redirect, 'Index redirects' );
-    like(
-        $response->content,
-        qr{This item has moved.*/orders},
-        'Redirects to /orders',
-    );
+    ok( $response->is_success, 'Index works!' );
 };
 
 done_testing;

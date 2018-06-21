@@ -13,20 +13,22 @@ subtest 'Orders page' => sub {
     $mech->get_ok('/orders');
     $mech->page_links_ok('Check all links');
     my @links = $mech->followable_links();
-    is_deeply(
-        \@links,
-        [],
-        'Got all links',
-    );
+    is( scalar @links, 2, 'Got two links' );
+    is( $links[0]->url, '/new_order', 'First link leads to /new_order' );
+    is( $links[1]->url, '/login',     'Second link leads to /login' );
 };
 
 subtest 'Found all orders' => sub {
-    my $first;
-    wq( $mech->content )->find('table > tr')
-        ->each(sub {
+    my ( $first, $num_orders );
+    wq( $mech->content )->find('table > tr')->each(
+        sub {
             $first++ or return;
-            ::p $_->html;
-        });
+            $num_orders++;
+        },
+    );
+
+
+    is( $num_orders - 1, 3, 'Found three orders' );
 };
 
 done_testing;
