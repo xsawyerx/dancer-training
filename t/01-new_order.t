@@ -57,7 +57,7 @@ subtest 'Can submit new order' => sub {
         {
             form_number => 1,
             fields      => {
-                name     => 'Test 2',
+                name     => 'Test 3',
                 cup_size => 'normal',
                 milk     => 'almond',
             },
