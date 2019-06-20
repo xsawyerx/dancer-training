@@ -51,7 +51,7 @@ get '/orders' => sub {
 
     template 'orders' => {
         orders => \@orders,
-        admin  => query_parameters->get('admin'),
+        admin  => session('username'),
     };
 };
 
