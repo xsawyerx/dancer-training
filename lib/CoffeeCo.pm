@@ -1,5 +1,6 @@
 package CoffeeCo;
 use Dancer2 0.163000;
+use Dancer2::Plugin::Auth::Tiny;
 use CoffeeCo::Order;
 use CoffeeCo::Utils;
 use MIME::Base64;
@@ -91,7 +92,7 @@ post '/login' => sub {
 };
 
 prefix '/order/:id' => sub {
-    patch '' => sub {
+    patch '' => needs 'login' => sub {
         my $order = $db->order_by_id( route_parameters->get('id') )
             or send_error("Requested order not found", 404);
         $order->set_served();
@@ -99,7 +100,7 @@ prefix '/order/:id' => sub {
         return 1;
     };
 
-    del '' => sub {
+    del '' => needs 'login' => sub {
         my $order = $db->order_by_id( route_parameters->get('id') )
             or send_error("Requested order not found", 404 );
         $db->delete_order($order);
